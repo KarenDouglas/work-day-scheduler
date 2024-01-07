@@ -44,6 +44,8 @@ $(function () {
 function renderTimeLineColors( id, el){
   const isPast = parseFloat(hour)> id
     const isCurrent = parseFloat(hour) === id
+    console.log(`isPast:${isPast} [${hour}, ${id}]`)
+    console.log(`isCurrent:${isCurrent} [${hour}, ${id}]`)
   if(isPast){
     el.classList.add('past') 
     el.classList.remove('present')
@@ -67,27 +69,27 @@ function saveToLocalStorage(tBlockID,input){
  // renders the scheduler HTML
 function renderTimeBlocks(){
   let hourID = 9
-  for(let i = 0 ; i < eventsStorage.hours.length-1; i++){
+  for(let i = 0 ; i < eventsStorage.hours.length; i++){
     let hourDisplayed = eventsStorage.hours[i][0] 
     
     const $div = document.createElement('div')
     let input
-      if(eventsStorage.hours[i][1]!== null){
-        input = eventsStorage.hours[i][1]
-      }else{
+    if(eventsStorage.hours[i][1]!== null){
+      input = eventsStorage.hours[i][1]
+    }else{
         input = ''
       }
-    $div.id= hourID++
-    $div.className = "row time-block"
-    $div.innerHTML=  `
-    <div class="col-2 col-md-1 hour text-center py-3">${hourDisplayed}</div>
-    <textarea  class="col-8 col-md-10 description" rows="3">${input} </textarea>
-    <button class="btn saveBtn col-2 col-md-1 clicked" aria-label="save">
-    <i class="fas fa-save " aria-hidden="true"></i>
-    </button>
-    `
-    renderTimeLineColors(hourID, $div)
-   
+      $div.id= hourID
+      $div.className = "row time-block"
+      $div.innerHTML=  `
+      <div class="col-2 col-md-1 hour text-center py-3">${hourDisplayed}</div>
+      <textarea  class="col-8 col-md-10 description" rows="3">${input} </textarea>
+      <button class="btn saveBtn col-2 col-md-1 clicked" aria-label="save">
+      <i class="fas fa-save " aria-hidden="true"></i>
+      </button>
+      `
+      
+      renderTimeLineColors(hourID++, $div)
       $timeBlocks.append($div)
       function handleSave(e){
         e.preventDefault()
