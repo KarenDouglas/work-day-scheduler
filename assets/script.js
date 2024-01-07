@@ -1,7 +1,6 @@
 const $timeBlocks = document.querySelector('.time-blocks')
 const $currentDate = document.querySelector('#currentDate')
 
-console.log(JSON.parse(localStorage.getItem('events')))
 
 $(function () {
 
@@ -44,8 +43,6 @@ $(function () {
 function renderTimeLineColors( id, el){
   const isPast = parseFloat(hour)> id
     const isCurrent = parseFloat(hour) === id
-    console.log(`isPast:${isPast} [${hour}, ${id}]`)
-    console.log(`isCurrent:${isCurrent} [${hour}, ${id}]`)
   if(isPast){
     el.classList.add('past') 
     el.classList.remove('present')
