@@ -1,5 +1,5 @@
 # work-day-scheduler
-[View the Live Site](https://karendouglas.github.io/portfolioCoffee/)
+Live Site URL: [karendouglas.github.io/work-day-scheduler/](https://karendouglas.github.io/work-day-scheduler/)
 ![Screenshot 2024-01-07 165720](https://github.com/KarenDouglas/code-quiz/assets/79128405/1e0389ad-f29d-4c21-b7a0-5287299e4087)
 ## Overview
 
