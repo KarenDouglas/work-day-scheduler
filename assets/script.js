@@ -60,17 +60,16 @@ function renderTimeLineColors( id, el){
 // saves inputs to storage
 function saveToLocalStorage(tBlockID,input){
   eventsStorage.hours[tBlockID - 9][1] = input.value
-  localStorage.setItem('events', JSON.stringify(eventsStorage))
- 
+  localStorage.setItem('events', JSON.stringify(eventsStorage)) 
 } 
  // renders the scheduler HTML
 function renderTimeBlocks(){
   let hourID = 9
   for(let i = 0 ; i < eventsStorage.hours.length; i++){
-    let hourDisplayed = eventsStorage.hours[i][0] 
-    
+    let hourDisplayed = eventsStorage.hours[i][0]    
     const $div = document.createElement('div')
     let input
+
     if(eventsStorage.hours[i][1]!== null){
       input = eventsStorage.hours[i][1]
     }else{
@@ -88,11 +87,13 @@ function renderTimeBlocks(){
       
       renderTimeLineColors(hourID++, $div)      
       $timeBlocks.append($div)
+
       // saves each input to appropriate field
       function handleSave(e){
         e.preventDefault()
         let $textArea;
         let $timeBlockID
+
         if(e.target.tagName === 'BUTTON'){
           $textArea = e.target.previousElementSibling
           $timeBlockID = $textArea.parentElement.id
