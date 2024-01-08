@@ -86,8 +86,9 @@ function renderTimeBlocks(){
       </button>
       `
       
-      renderTimeLineColors(hourID++, $div)
+      renderTimeLineColors(hourID++, $div)      
       $timeBlocks.append($div)
+      // saves each input to appropriate field
       function handleSave(e){
         e.preventDefault()
         let $textArea;
