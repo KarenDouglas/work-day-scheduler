@@ -5,7 +5,7 @@ const $currentDate = document.querySelector('#currentDate')
 $(function () {
 
 
-  const eventsStorage = JSON.parse(localStorage.getItem('events'))
+  let eventsStorage;
   // dayJs variables
   const day= dayjs().format('dddd') 
   const month= dayjs().format('MMMM')
@@ -31,10 +31,14 @@ $(function () {
   }
   const getLocalStorage =localStorage.getItem('events')
   const getParsedLocalStorage =JSON.parse(localStorage.getItem('events'))
+  console.log(getParsedLocalStorage.date ,date)
+  console.log(getParsedLocalStorage.date === date)
 
   // sets local storage with basic day obj if its a new date or if there isn't local storage set
-  if( getLocalStorage && getParsedLocalStorage.date !== date || !getLocalStorage ){
+  if(  getLocalStorage &&getParsedLocalStorage.date != date || !getLocalStorage ){
     localStorage.setItem('events',JSON.stringify(dayObj))
+  }else{
+   eventsStorage= JSON.parse(localStorage.getItem('events'))
   }
   // sets date in DOM
   $currentDate.innerText = JSON.parse(localStorage.getItem('events')).date
