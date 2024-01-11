@@ -61,16 +61,23 @@ function renderTimeLineColors( id, el){
 }
 // saves inputs to storage
 function saveToLocalStorage(tBlockID,input){
+  console.log(eventsStorage.hours)
   eventsStorage.hours[tBlockID - 9][1] = input.value
   localStorage.setItem('events', JSON.stringify(eventsStorage)) 
 } 
  // renders the scheduler HTML
 function renderTimeBlocks(){
   let hourID = 9
-  const array = eventsStorage.hours || dayObj.hours
+  let array; 
+  if(eventsStorage){
+    array = eventsStorage.hours
+  }else{
+    array = dayObj.hours
+    localStorage.setItem('events',JSON.stringify(dayObj))
+  }
   for(let i = 0 ; i < array.length; i++){
     let hourDisplayed = array[i][0] 
-    console.log(hourDisplayed)   
+   
     const $div = document.createElement('div')
     let input
 
