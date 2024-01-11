@@ -1,6 +1,6 @@
 const $timeBlocks = document.querySelector('.time-blocks')
 const $currentDate = document.querySelector('#currentDate')
-
+//localStorage.clear()
 
 $(function () {
 
@@ -29,11 +29,9 @@ $(function () {
       ['5PM', null]
     ],
   }
+
   const getLocalStorage =localStorage.getItem('events')
   const getParsedLocalStorage =JSON.parse(localStorage.getItem('events'))
-  console.log(getParsedLocalStorage.date ,date)
-  console.log(getParsedLocalStorage.date === date)
-
   // sets local storage with basic day obj if its a new date or if there isn't local storage set
   if(  getLocalStorage &&getParsedLocalStorage.date != date || !getLocalStorage ){
     localStorage.setItem('events',JSON.stringify(dayObj))
