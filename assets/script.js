@@ -4,8 +4,6 @@ const $currentDate = document.querySelector('#currentDate')
 
 $(function () {
 
-
-  let eventsStorage;
   // dayJs variables
   const day= dayjs().format('dddd') 
   const month= dayjs().format('MMMM')
@@ -29,52 +27,53 @@ $(function () {
       ['5PM', null]
     ],
   }
-
-  const getLocalStorage =localStorage.getItem('events')
-  const getParsedLocalStorage =JSON.parse(localStorage.getItem('events'))
+  
   // sets local storage with basic day obj if its a new date or if there isn't local storage set
-  if(  getLocalStorage &&getParsedLocalStorage.date != date || !getLocalStorage ){
-    localStorage.setItem('events',JSON.stringify(dayObj))
-  }else{
-   eventsStorage= JSON.parse(localStorage.getItem('events'))
-  }
-  // sets date in DOM
-  $currentDate.innerText = JSON.parse(localStorage.getItem('events')).date
-
-// assigns colors to appropriate time block
-function renderTimeLineColors( id, el){
-  const isPast = parseFloat(hour)> id
+  // if(  getLocalStorage &&getParsedLocalStorage.date != date || !getLocalStorage ){
+  //   localStorage.setItem('events',JSON.stringify(dayObj))
+  // }else{
+  //  eventsStorage= JSON.parse(localStorage.getItem('events'))
+  // }
+  
+  // assigns colors to appropriate time block
+  function renderTimeLineColors( id, el){
+    const isPast = parseFloat(hour)> id
     const isCurrent = parseFloat(hour) === id
-  if(isPast){
-    el.classList.add('past') 
-    el.classList.remove('present')
-    el.classList.remove('future')
-  }else if(isCurrent){
-    el.classList.add('present') 
-    el.classList.remove('past')
-    el.classList.remove('future')
-  }else{
-    el.classList.add('future') 
-    el.classList.remove('past')
-    el.classList.remove('present')
+    if(isPast){
+      el.classList.add('past') 
+      el.classList.remove('present')
+      el.classList.remove('future')
+    }else if(isCurrent){
+      el.classList.add('present') 
+      el.classList.remove('past')
+      el.classList.remove('future')
+    }else{
+      el.classList.add('future') 
+      el.classList.remove('past')
+      el.classList.remove('present')
+    }
   }
-}
-// saves inputs to storage
-function saveToLocalStorage(tBlockID,input){
-  console.log(eventsStorage.hours)
-  eventsStorage.hours[tBlockID - 9][1] = input.value
-  localStorage.setItem('events', JSON.stringify(eventsStorage)) 
-} 
- // renders the scheduler HTML
-function renderTimeBlocks(){
-  let hourID = 9
-  let array; 
-  if(eventsStorage){
-    array = eventsStorage.hours
-  }else{
-    array = dayObj.hours
-    localStorage.setItem('events',JSON.stringify(dayObj))
-  }
+  // saves inputs to storage
+  function saveToLocalStorage(tBlockID,input){  
+   const arr = JSON.parse(localStorage.getItem('events'))
+    arr.hours[tBlockID - 9][1] = input.value
+    localStorage.setItem('events', JSON.stringify(arr)) 
+  } 
+  
+  
+  // renders the scheduler HTML
+  function renderTimeBlocks(){
+   let getLocalStorage =localStorage.getItem('events')   
+    let hourID = 9
+    let array;     
+    if(!getLocalStorage){
+      localStorage.setItem('events', JSON.stringify(dayObj))
+      getLocalStorage = localStorage.getItem('events')
+      // sets date in DOM  
+    }
+    $currentDate.innerText =JSON.parse(localStorage.getItem('events')).date
+  array = JSON.parse(localStorage.getItem('events')).hours
+  
   for(let i = 0 ; i < array.length; i++){
     let hourDisplayed = array[i][0] 
    
