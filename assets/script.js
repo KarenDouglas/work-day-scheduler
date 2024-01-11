@@ -67,13 +67,15 @@ function saveToLocalStorage(tBlockID,input){
  // renders the scheduler HTML
 function renderTimeBlocks(){
   let hourID = 9
-  for(let i = 0 ; i < eventsStorage.hours.length; i++){
-    let hourDisplayed = eventsStorage.hours[i][0]    
+  const array = eventsStorage.hours || dayObj.hours
+  for(let i = 0 ; i < array.length; i++){
+    let hourDisplayed = array[i][0] 
+    console.log(hourDisplayed)   
     const $div = document.createElement('div')
     let input
 
-    if(eventsStorage.hours[i][1]!== null){
-      input = eventsStorage.hours[i][1]
+    if(array[i][1]!== null){
+      input = array[i][1]
     }else{
         input = ''
       }
